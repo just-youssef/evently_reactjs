@@ -8,6 +8,7 @@ const UpdateEvent = () => {
   const token = useSelector((state) => state.user.token);
   const navigate = useNavigate();
   const { id } = useParams();
+  const { login, isAuthenticated, isLoading } = useKindeAuth();
 
   useEffect(() => {
     const getEvent = async () => {
@@ -59,6 +60,8 @@ const UpdateEvent = () => {
       console.log(error);
     }
   }
+
+  if (!isAuthenticated && !isLoading) login();
 
   return (
     <EventForm type="Update" handleSubmit={handleSubmit} event={event} setEvent={setEvent} />

@@ -1,3 +1,4 @@
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { EventForm } from '../components'
 import { useState } from "react";
 import { useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ const AddEvent = () => {
   const token = useSelector((state) => state.user.token);
   const userDBID = useSelector((state) => state.user.dbid);
   const navigate = useNavigate();
+  const { login, isAuthenticated, isLoading } = useKindeAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ const AddEvent = () => {
     }
   }
 
-  // if (!token) redirect("/signIn");
+  if (!isAuthenticated && !isLoading) login();
 
   return (
     <EventForm type="Add New" handleSubmit={handleSubmit} event={event} setEvent={setEvent} />

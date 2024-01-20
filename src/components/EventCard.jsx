@@ -8,6 +8,7 @@ import TimelapseIcon from '@mui/icons-material/Timelapse';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 
 const EventCard = ({ event }) => {
   const token = useSelector((state) => state.user.token);
@@ -16,6 +17,7 @@ const EventCard = ({ event }) => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [confirmBookOpen, setConfirmBookOpen] = useState(false);
   const [ticketBooked, setTicketBooked] = useState(false);
+  const { login } = useKindeAuth();
 
   useEffect(() => {
     const checkTicketBook = async () => {
@@ -85,7 +87,7 @@ const EventCard = ({ event }) => {
     if(token){
       setConfirmBookOpen(true)
     } else {
-      navigate('/signIn')
+      login();
     }
   }
   return (
