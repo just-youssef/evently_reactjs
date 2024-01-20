@@ -1,3 +1,4 @@
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { EventForm } from '../components'
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
